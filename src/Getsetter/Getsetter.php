@@ -11,7 +11,7 @@ trait Getsetter
      * @param array $arguments
      * @return mixed
      */
-    public function __call(string $method, array $arguments)
+    public function __call($method, $arguments)
     {
         $prefix = substr($method, 0, 3);
         $property = lcfirst(substr($method, 3));
@@ -35,7 +35,7 @@ trait Getsetter
      * @param string $property
      * @return mixed
      */
-    public function __get(string $property)
+    public function __get($property)
     {
         return $this->$property;
     }
@@ -46,7 +46,7 @@ trait Getsetter
      * @param string $property
      * @param mixed $value
      */
-    public function __set(string $property, $value)
+    public function __set($property, $value)
     {
         $this->$property = $value;
     }
