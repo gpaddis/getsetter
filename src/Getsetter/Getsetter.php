@@ -26,7 +26,6 @@ trait Getsetter
             return $this->__set($property, ...$arguments);
         } else {
             throw new \BadMethodCallException("Invalid method call: {$method}.");
-
         }
     }
 
