@@ -13,7 +13,7 @@ class GetsetterTest extends TestCase
     }
 
     /** @test */
-    public function it_sets_and_gets_an_existing_protected_property()
+    public function it_sets_and_gets_existing_protected_properties()
     {
         $this->baseClass->setId(5);
         $this->baseClass->setName("Test Name");
