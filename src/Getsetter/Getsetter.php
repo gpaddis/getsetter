@@ -20,7 +20,7 @@ trait Getsetter
      * @param array $arguments
      * @return mixed
      */
-    public function __call($method, $arguments)
+    public function __call($method, $value)
     {
         $prefix = substr($method, 0, 3);
         $property = lcfirst(substr($method, 3));
@@ -30,33 +30,13 @@ trait Getsetter
         }
 
         if ($prefix === "get") {
-            return $this->__get($property);
-        } elseif ($prefix === "set") {
-            return $this->__set($property, ...$arguments);
+            return $this->$property;
+        } elseif ($prefix === "set" && isset($value[0])) {
+            return $this->$property = $value[0];
         } else {
-            throw new \BadMethodCallException("The method {$method} does not exist.");
+            throw new \BadMethodCallException(
+                sprintf('Call to undefined method %s::%s()', get_class($this), $method)
+            );
         }
-    }
-
-    /**
-     * Get the value of the property called.
-     *
-     * @param string $property
-     * @return mixed
-     */
-    public function __get($property)
-    {
-        return $this->$property;
-    }
-
-    /**
-     * Set the value provided in property.
-     *
-     * @param string $property
-     * @param mixed $value
-     */
-    public function __set($property, $value)
-    {
-        $this->$property = $value;
     }
 }
