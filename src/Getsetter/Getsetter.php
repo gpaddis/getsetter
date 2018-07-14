@@ -32,7 +32,7 @@ trait Getsetter
         if ($prefix === "get") {
             return $this->$property;
         } elseif ($prefix === "set") {
-            return $this->setValue($property, $value);
+            return $this->assignValue($property, $value);
         } else {
             throw new \BadMethodCallException(
                 sprintf('Call to undefined method %s::%s()', get_class($this), $method)
@@ -46,7 +46,7 @@ trait Getsetter
      * @param string $property
      * @param array $value
      */
-    protected function setValue($property, $value)
+    protected function assignValue($property, $value)
     {
         if (count($value) > 1) {
             throw new \BadMethodCallException("Cannot assign multiple values to a property.");
