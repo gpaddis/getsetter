@@ -54,4 +54,11 @@ class GetsetterTest extends TestCase
         $this->expectException("BadMethodCallException");
         $this->baseClass->fooId();
     }
+
+    /** @test */
+    public function it_cannot_assign_multiple_values_to_a_property()
+    {
+        $this->expectException("BadMethodCallException");
+        $this->baseClass->setId(1, 2, 3);
+    }
 }

@@ -17,7 +17,7 @@ trait Getsetter
      * Get or set a property in the class with a call to getProperty or setProperty.
      *
      * @param string $method
-     * @param array $arguments
+     * @param array $value
      * @return mixed
      */
     public function __call($method, $value)
@@ -31,12 +31,29 @@ trait Getsetter
 
         if ($prefix === "get") {
             return $this->$property;
-        } elseif ($prefix === "set" && isset($value[0])) {
-            return $this->$property = $value[0];
+        } elseif ($prefix === "set") {
+            return $this->setValue($property, $value);
         } else {
             throw new \BadMethodCallException(
                 sprintf('Call to undefined method %s::%s()', get_class($this), $method)
             );
+        }
+    }
+
+    /**
+     * Assign the value to the property.
+     *
+     * @param string $property
+     * @param array $value
+     */
+    protected function setValue($property, $value)
+    {
+        if (count($value) > 1) {
+            throw new \BadMethodCallException("Cannot assign multiple values to a property.");
+        }
+
+        if (isset($value[0])) {
+            $this->$property = $value[0];
         }
     }
 }
