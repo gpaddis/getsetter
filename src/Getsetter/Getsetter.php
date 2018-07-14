@@ -1,11 +1,20 @@
 <?php
 
+/**
+ * This file is part of the Getsetter package.
+ *
+ * Author: Gianpiero Addis <gianpiero.addis@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Getsetter;
 
 trait Getsetter
 {
     /**
-     * Get or set a protected property in the class with a call to getProperty or setProperty.
+     * Get or set a property in the class with a call to getProperty or setProperty.
      *
      * @param string $method
      * @param array $arguments
@@ -25,12 +34,12 @@ trait Getsetter
         } elseif ($prefix === "set") {
             return $this->__set($property, ...$arguments);
         } else {
-            throw new \BadMethodCallException("Invalid method call: {$method}.");
+            throw new \BadMethodCallException("The method {$method} does not exist.");
         }
     }
 
     /**
-     * Get the property.
+     * Get the value of the property called.
      *
      * @param string $property
      * @return mixed
@@ -41,7 +50,7 @@ trait Getsetter
     }
 
     /**
-     * Set the property.
+     * Set the value provided in property.
      *
      * @param string $property
      * @param mixed $value
