@@ -17,14 +17,16 @@ trait Getsetter
         $property = lcfirst(substr($method, 3));
 
         if (!property_exists($this, $property)) {
-            throw new \BadMethodCallException("The property $property does not exist in this object.");
+            throw new \BadMethodCallException("The property {$property} does not exist in this object.");
         }
-
 
         if ($prefix === "get") {
             return $this->__get($property);
         } elseif ($prefix === "set") {
             return $this->__set($property, ...$arguments);
+        } else {
+            throw new \BadMethodCallException("Invalid method call: {$method}.");
+
         }
     }
 

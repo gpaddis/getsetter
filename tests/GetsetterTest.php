@@ -38,8 +38,20 @@ class GetsetterTest extends TestCase
     public function it_throws_an_exception_if_the_property_does_not_exist()
     {
         $this->expectException("BadMethodCallException");
-
         $this->baseClass->setSomeNonexistingProperty("Value");
-        $this->baseClass->getSomeNonexistingProperty();
+    }
+
+    /** @test */
+    public function it_throws_an_exception_if_the_method_does_not_exist()
+    {
+        $this->expectException("BadMethodCallException");
+        $this->baseClass->callSomeMethod();
+    }
+
+    /** @test */
+    public function it_throws_an_exception_if_the_prefix_is_not_get_or_set()
+    {
+        $this->expectException("BadMethodCallException");
+        $this->baseClass->fooId();
     }
 }
