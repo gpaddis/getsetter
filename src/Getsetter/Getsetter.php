@@ -46,7 +46,7 @@ trait Getsetter
      * @param string $property
      * @param array $value
      */
-    protected function assignValue($property, $value)
+    protected final function assignValue($property, $value)
     {
         if (count($value) > 1) {
             throw new \BadMethodCallException("Cannot assign multiple values to a property.");
