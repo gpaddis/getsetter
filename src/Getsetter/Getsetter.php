@@ -44,7 +44,7 @@ trait Getsetter
      * Get the value from the property.
      *
      * @param string $property
-     * @return void
+     * @return mixed
      */
     protected function _get($property)
     {
@@ -56,6 +56,7 @@ trait Getsetter
      *
      * @param string $property
      * @param array $value
+     * @return self
      */
     protected function _set($property, $value)
     {
@@ -66,5 +67,7 @@ trait Getsetter
         if (isset($value[0])) {
             $this->$property = $value[0];
         }
+
+        return $this;
     }
 }
