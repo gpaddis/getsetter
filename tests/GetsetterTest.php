@@ -10,8 +10,9 @@ class GetsetterTest extends TestCase
     protected $id;
     protected $name;
     protected $lastName;
+    protected $something;
 
-    public function getSomethingElse()
+    public function getSomething()
     {
         return "Something Else";
     }
@@ -35,7 +36,8 @@ class GetsetterTest extends TestCase
     /** @test */
     public function it_gives_precedence_to_existing_getter_methods()
     {
-        $this->assertEquals("Something Else", $this->getSomethingElse());
+        $this->setSomething("Something");
+        $this->assertEquals("Something Else", $this->getSomething());
     }
 
     /** @test */
