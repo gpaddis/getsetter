@@ -1,27 +1,31 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Getsetter\ExampleClass;
+use Getsetter\Getsetter;
 
 class GetsetterTest extends TestCase
 {
-    protected $baseClass;
+    use Getsetter;
 
-    public function setUp()
+    protected $id;
+    protected $name;
+    protected $lastName;
+
+    public function getSomethingElse()
     {
-        $this->baseClass = new ExampleClass();
+        return "Something Else";
     }
 
     /** @test */
     public function it_sets_and_gets_existing_protected_properties()
     {
-        $this->baseClass->setId(5);
-        $this->baseClass->setName("Test Name");
-        $this->baseClass->setLastName("Test Last Name");
+        $this->setId(5);
+        $this->setName("Test Name");
+        $this->setLastName("Test Last Name");
 
-        $id = $this->baseClass->getId();
-        $name = $this->baseClass->getName();
-        $lastName = $this->baseClass->getLastName();
+        $id = $this->getId();
+        $name = $this->getName();
+        $lastName = $this->getLastName();
 
         $this->assertEquals(5, $id);
         $this->assertEquals("Test Name", $name);
@@ -31,34 +35,34 @@ class GetsetterTest extends TestCase
     /** @test */
     public function it_gives_precedence_to_existing_getter_methods()
     {
-        $this->assertEquals("Something Else", $this->baseClass->getSomethingElse());
+        $this->assertEquals("Something Else", $this->getSomethingElse());
     }
 
     /** @test */
     public function it_throws_an_exception_if_the_property_does_not_exist()
     {
         $this->expectException("BadMethodCallException");
-        $this->baseClass->setSomeNonExistingProperty("Value");
+        $this->setSomeNonExistingProperty("Value");
     }
 
     /** @test */
     public function it_throws_an_exception_if_the_method_does_not_exist()
     {
         $this->expectException("BadMethodCallException");
-        $this->baseClass->callSomeNonExistingMethod();
+        $this->callSomeNonExistingMethod();
     }
 
     /** @test */
     public function it_throws_an_exception_if_the_prefix_is_not_get_or_set()
     {
         $this->expectException("BadMethodCallException");
-        $this->baseClass->fooId();
+        $this->fooId();
     }
 
     /** @test */
     public function it_cannot_assign_multiple_values_to_a_property()
     {
         $this->expectException("BadMethodCallException");
-        $this->baseClass->setId(1, 2, 3);
+        $this->setId(1, 2, 3);
     }
 }
